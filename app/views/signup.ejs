@@ -1,0 +1,28 @@
+<% include header %>
+
+
+    <h1 id="title">PASOS</h1>
+    <h2 id="subtitle">CREAR CUENTA</h2>
+
+    <% if (message.length > 0) { %>
+        <div id="alert-danger" class="alert alert-danger">
+          <%= message %>
+        </div>
+    <% } %>
+
+    <form class="form-signup" action="signup" method="post">
+      <div class="card text-center mt-5">
+        <div class="card-body">
+          <input name="name" id="name" class="form-control" placeholder="Nombre" type="name" required>
+          <input name="email" id="email" class="form-control" placeholder="Correo" type="email" required>
+          <input name="password" id="password" class="form-control" placeholder="Contraseña" type="password" required>
+          <input name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirmar Contraseña" type="password" required>
+        </div>    
+      </div>
+      <input type="submit" id="btnLogin" value="Registrar" class="btn btn-light">
+      <a href="login" class="btn btn-light" id="btnLogin">
+        <span class="fa fa-user"></span> ¿Ya tienes cuenta?
+      </a>
+  </form>
+
+<%include footer%>

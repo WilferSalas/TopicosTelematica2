@@ -1,0 +1,71 @@
+<% include header %>
+
+    <div id="topBar">
+        <h3 id="titlePP"> Bienvenido <%= user.name%> </h3>
+        <table id="options" align="right" name="options">
+            <tr>
+                <th id="btnHome">
+                    <a href="profile" class="btn btn-light">
+                        <span class="btn btn-light btnProfile">Inicio</span> 
+                    </a>
+                </th>
+                <th id="btnRoutes">
+                    <a href="routes" class="btn btn-light btnProfile">
+                        <span class="btn btn-light">Mis rutas</span> 
+                    </a>
+                </th>
+                <th id="btnShareWithMe">
+                    <a href="share" class="btn btn-light btnProfile">
+                        <span class="btn btn-light">Compartido Conmigo</span> 
+                    </a>
+                </th>
+                <th id="btnConfig">
+                    <a href="config" class="btn btn-light btnProfile">
+                        <span class="btn btn-light">Configuracion</span> 
+                    </a>
+                </th>
+                <th id="btnLogout">
+                    <a href="logout" class="btn btn-light">
+                        <span class="btn btn-light btnProfile">Salir</span> 
+                    </a>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+    <div  id="botBar">
+        <h5 id="creado"> Creado por: Juan Pablo Londoño </h5>
+        <table id="infoBot">
+            <tr>
+                <th id="derechos">
+                    <h5>Todos los derechos reservados   2018</h5>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+  
+
+    <% if (message.length > 0) { %>
+        <div id="alert-danger" class="alert alert-success">
+          <%= message %>
+        </div>
+    <% } %>
+
+    <form class="form-config" action="config" method="post">
+
+      <input name="email" id="email" type="hidden" value= <%= user.email%> >
+      <div class="card text-center mt-5">
+        <div class="card-body">
+          <h6>Nombre</h6>
+          <input  name="name" id="name" class="form-control" placeholder="Nombre" type="text" value="<%= user.name %>" required>
+           <h6>Contraseña</h6> 
+          <input name="password" id="password" class="form-control" placeholder="Contraseña" value="<%= user.password %>" type="password" required>
+        </div>    
+      </div>
+      <input type="submit" id="btnConfig" value="Confirmar" class="btn btn-light">
+    </form>
+
+
+<%include footer%>
+

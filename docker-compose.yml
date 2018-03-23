@@ -1,0 +1,20 @@
+version: '2'
+services:
+  proyect1:
+    build: ./
+    container_name: "proyecto1"
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    container_name: "mongodb"
+    volumes:
+          - /data/db
+    ports:
+     - "27017:27017"

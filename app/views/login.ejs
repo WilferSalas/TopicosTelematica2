@@ -1,0 +1,26 @@
+<% include header %>
+
+
+    <h1 id="title">PASOS</h1>
+    <h2 id="subtitle">INICIAR SESION</h2>
+
+    <% if (message.length > 0) { %>
+        <div id="alert-danger" class="alert alert-danger">
+            <%= message %>
+        </div>
+    <% } %>
+
+    <form class="form-signup" action="login" method="post">
+      <div class="card text-center mt-5">
+        <div class="card-body">
+          <input name="email" id="email" class="form-control" placeholder="Correo" type="email" required>
+          <input name="password" id="password" class="form-control" placeholder="Contraseña" type="password"required>
+        </div>    
+      </div>
+      <input type="submit" id="btnLogin" value="Ingresar" class="btn btn-light">
+      <a href="signup" class="btn btn-light" id="btnLogin">
+        <span class="btn btn-light">¿Necesitas una cuenta?</span> 
+      </a>
+    </form>
+
+<%include footer%>
