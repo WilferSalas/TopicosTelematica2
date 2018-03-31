@@ -1,32 +1,32 @@
 <% include header %>
 
     <div id="topBar">
-        <h3 id="titlePP"> Bienvenido <%= user.name %> </h3>
+        <h3 id="titlePP"> Bienvenido <%= user.nickname %> </h3>
         <table id="options" align="right" name="options">
             <tr>
                 <th id="btnHome">
                     <a href="profile" class="btn btn-light">
-                        <span class="btn btn-light btnProfile">Inicio</span> 
+                        <span class="btn btn-light btnProfile">Inicio</span>
                     </a>
                 </th>
                 <th id="btnRoutes">
                     <a href="routes" class="btn btn-light btnProfile">
-                        <span class="btn btn-light">Mis rutas</span> 
+                        <span class="btn btn-light">Mis rutas</span>
                     </a>
                 </th>
                 <th id="btnShareWithMe">
                     <a href="share" class="btn btn-light btnProfile">
-                        <span class="btn btn-light">Compartido Conmigo</span> 
+                        <span class="btn btn-light">Compartido Conmigo</span>
                     </a>
                 </th>
                 <th id="btnConfig">
                     <a href="config" class="btn btn-light btnProfile">
-                        <span class="btn btn-light">Configuracion</span> 
+                        <span class="btn btn-light">Configuracion</span>
                     </a>
                 </th>
                 <th id="btnLogout">
                     <a href="logout" class="btn btn-light">
-                        <span class="btn btn-light btnProfile">Salir</span> 
+                        <span class="btn btn-light btnProfile">Salir</span>
                     </a>
                 </th>
             </tr>
@@ -57,7 +57,7 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5Lw093i1GDjUPXg0gn_0Xl7qvgNdOCkA" async="async" defer="defer"></script>
 
-    
+
     <script>
         //Direcciones
 
@@ -122,10 +122,10 @@
             }
         }
         initMap();
-        var intervalo = setInterval('calcNewPosition()', 5000); 
+        var intervalo = setInterval('calcNewPosition()', 5000);
 
 
     </script>
-    
+
 
 <%include footer%>
