@@ -45,7 +45,7 @@ module.exports = (app, config) => {
       domain: 'topicos.auth0.com',
       clientID: '0Lw35thxI_O8RLfCKixOVaqqI-plPufb',
       clientSecret: '0FbyTpYqYi7ZjrGVWPNsWT1-_calSP84fg1LP5Fhm-u9LJlYQ91Le6_IRguCqZvl',
-      callbackURL: 'http://localhost:3000/callback'
+      callbackURL: 'http://proyecto4.dis.eafit.edu.co/callback'
     },
     (accessToken, refreshToken, extraParams, profile, done) => {
       return done(null, profile);

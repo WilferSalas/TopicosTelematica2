@@ -8,7 +8,7 @@ const router = express.Router();
 const env = {
   AUTH0_CLIENT_ID: '0Lw35thxI_O8RLfCKixOVaqqI-plPufb',
   AUTH0_DOMAIN: 'topicos.auth0.com',
-  AUTH0_CALLBACK_URL: 'http://localhost:3000/callback'
+  AUTH0_CALLBACK_URL: 'http://proyecto4.dis.eafit.edu.co/callback'
 };
 
 module.exports = (app, passport) => {
