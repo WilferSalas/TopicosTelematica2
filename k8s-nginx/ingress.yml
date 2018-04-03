@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: lbnginx-ingress
+  namespace: proyecto4
+spec:
+  rules:
+    - host: proyecto4.dis.eafit.edu.co
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: nginx-service
+              servicePort: 80
