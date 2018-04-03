@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@google/maps": "^0.4.5",
+    "auth0-js": "^9.4.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "compression": "^1.5.2",

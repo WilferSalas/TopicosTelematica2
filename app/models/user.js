@@ -17,13 +17,13 @@ const userSchema = new Schema({
     password: String,
     id: String,
     token: String
-  }, 
+  },
   twitter: {
     email: String,
     password: String,
     id: String,
     token: String
-  } 
+  }
 });
 
 userSchema.methods.generateHash = function (password){
@@ -45,4 +45,4 @@ userSchema.methods.validPassword = function (password){
 userSchema.virtual('date')
   .get(() => this._id.getTimestamp());
 
-module.exports = mongoose.model('user', userSchema);
+// module.exports = mongoose.model('user', userSchema);
