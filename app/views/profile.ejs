@@ -1,32 +1,32 @@
 <% include header %>
 
     <div id="topBar">
-        <h3 id="titlePP"> Bienvenido <%= user.nickname %> </h3>
+        <h3 id="titlePP"> Bienvenido  </h3>
         <table id="options" align="right" name="options">
             <tr>
                 <th id="btnHome">
                     <a href="profile" class="btn btn-light">
-                        <span class="btn btn-light btnProfile">Inicio</span>
+                        <span class="btn btn-light btnProfile">Inicio</span> 
                     </a>
                 </th>
                 <th id="btnRoutes">
                     <a href="routes" class="btn btn-light btnProfile">
-                        <span class="btn btn-light">Mis rutas</span>
+                        <span class="btn btn-light">Mis rutas</span> 
                     </a>
                 </th>
                 <th id="btnShareWithMe">
                     <a href="share" class="btn btn-light btnProfile">
-                        <span class="btn btn-light">Compartido Conmigo</span>
+                        <span class="btn btn-light">Compartido Conmigo</span> 
                     </a>
                 </th>
                 <th id="btnConfig">
                     <a href="config" class="btn btn-light btnProfile">
-                        <span class="btn btn-light">Configuracion</span>
+                        <span class="btn btn-light">Configuracion</span> 
                     </a>
                 </th>
                 <th id="btnLogout">
                     <a href="logout" class="btn btn-light">
-                        <span class="btn btn-light btnProfile">Salir</span>
+                        <span class="btn btn-light btnProfile">Salir</span> 
                     </a>
                 </th>
             </tr>
@@ -57,75 +57,57 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5Lw093i1GDjUPXg0gn_0Xl7qvgNdOCkA" async="async" defer="defer"></script>
 
-
+    
     <script>
-        //Direcciones
-
         var directionsDisyplay;
-        //var directionsService = new google.maps.DirectionsService();
-        var directionsMap;
-        var z = document.getElementById("map");
-        var start;
-        var end = 'eafit';
-
+        var markers = [];
+        var directionsLongitude;
+        var directionsLatitude;
+        var primeraEntrada = 1;
+        
         function initMap(){
             navigator.geolocation.getCurrentPosition(showPosition);
             function showPosition(position){
-                start = end;
                 directionsLatitude = position.coords.latitude;
                 directionsLongitude = position.coords.longitude;
-                myDirectionsLatLng = new google.maps.LatLng(directionsLatitude, directionsLongitude);
-                directionsDisyplay = new google.maps.DirectionsRenderer();
-                end = new google.maps.LatLng(directionsLatitude, directionsLongitude);
-                var mapOptions = {
-                    zoom: 10,
-                    center: end,
-                    title: "estas aca"
-                };
-                directionsMap = new google.maps.Map(document.getElementById('map'));
-                directionsDisyplay.setMap(directionsMap);
-                var directionsService = new google.maps.DirectionsService();
-                var request = {
-                    origin: start,
-                    destination: end,
-                    travelMode: google.maps.TravelMode.WALKING
-                };
-                directionsService.route(request, function (result, status) {
-                    if (status == google.maps.DirectionsStatus.OK) {
-                      directionsDisyplay.setDirections(result);
-                    }
+                markers.push(directionsLatitude, directionsLongitude);
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: {lat: markers[markers.length-2], lng: markers[markers.length-1]}
                 });
-
-            }
-        }
-
-        function calcNewPosition(){
-            navigator.geolocation.getCurrentPosition(showPosition);
-            function showPosition(position){
-                start = end;
-                directionsLatitude = position.coords.latitude;
-                directionsLongitude = position.coords.longitude;
-                myDirectionsLatLng = new google.maps.LatLng(directionsLatitude, directionsLongitude);
-                directionsDisyplay = new google.maps.DirectionsRenderer();
-                end = new google.maps.LatLng(directionsLatitude, directionsLongitude);
-                var directionsService = new google.maps.DirectionsService();
-                var request = {
-                    origin: start,
-                    destination: end,
-                    travelMode: google.maps.TravelMode.WALKING
-                };
-                directionsService.route(request, function (result, status) {
-                    if (status == google.maps.DirectionsStatus.OK) {
-                      directionsDisyplay.setDirections(result);
-                    }
-                });
+                for (var i = 0; i < markers.length; i=i+2) {
+                    var j = i+1;
+                    var marker = new google.maps.Marker({
+                    position: {lat: markers[i], lng: markers[j]},
+                    map: map
+                    });
+                }
+                
+                if(primeraEntrada == 1){
+                    primeraEntrada = 0;
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 5000);   
+                }else if( (Math.abs((Math.abs(directionsLatitude) - Math.abs(markers[markers.length-2]))) > 0.01) || (Math.abs((Math.abs(directionsLongitude) - Math.abs(markers[markers.length-1]))) > 0.01)){
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 5000);
+                }else if((Math.abs((Math.abs(directionsLatitude) - Math.abs(markers[markers.length-2]))) > 0.001) || (Math.abs((Math.abs(directionsLongitude) - Math.abs(markers[markers.length-1]))) > 0.001)){
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 10000);
+                }else if((Math.abs((Math.abs(directionsLatitude) - Math.abs(markers[markers.length-2]))) > 0.0001) || (Math.abs((Math.abs(directionsLongitude) - Math.abs(markers[markers.length-1]))) > 0.001)){
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 30000);
+                }else{
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 60000);
+                }                
             }
         }
         initMap();
-        var intervalo = setInterval('calcNewPosition()', 5000);
-
-
+        intervalo = setInterval('initMap()', 5000);
+ 
+        
+        
     </script>
-
+    
 
 <%include footer%>
