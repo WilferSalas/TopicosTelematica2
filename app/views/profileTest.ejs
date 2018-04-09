@@ -1,0 +1,113 @@
+<% include header %>
+
+    <div id="topBar">
+        <h3 id="titlePP"> Bienvenido  </h3>
+        <table id="options" align="right" name="options">
+            <tr>
+                <th id="btnHome">
+                    <a href="profile" class="btn btn-light">
+                        <span class="btn btn-light btnProfile">Inicio</span> 
+                    </a>
+                </th>
+                <th id="btnRoutes">
+                    <a href="routes" class="btn btn-light btnProfile">
+                        <span class="btn btn-light">Mis rutas</span> 
+                    </a>
+                </th>
+                <th id="btnShareWithMe">
+                    <a href="share" class="btn btn-light btnProfile">
+                        <span class="btn btn-light">Compartido Conmigo</span> 
+                    </a>
+                </th>
+                <th id="btnConfig">
+                    <a href="config" class="btn btn-light btnProfile">
+                        <span class="btn btn-light">Configuracion</span> 
+                    </a>
+                </th>
+                <th id="btnLogout">
+                    <a href="logout" class="btn btn-light">
+                        <span class="btn btn-light btnProfile">Salir</span> 
+                    </a>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <div>
+            <h1 id="title">Tú Camino</h1>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <!--<button id="btnSaveRoute" onclick="takeScreenshot()" class="btn btn-light">Guardar Ruta </button>-->
+    <p id="demo"></p>
+    <div  id="botBar">
+        <h5 id="creado"> Creado por: Juan Pablo Londoño </h5>
+        <table id="infoBot">
+            <tr>
+                <th id="derechos">
+                    <h5>Todos los derechos reservados   2018</h5>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5Lw093i1GDjUPXg0gn_0Xl7qvgNdOCkA" async="async" defer="defer"></script>
+
+    
+    <script>
+        var directionsDisyplay;
+        var markers = [];
+        var directionsLongitude;
+        var directionsLatitude;
+        var primeraEntrada = 1;
+        
+        function initMap(){
+            navigator.geolocation.getCurrentPosition(showPosition);
+            function showPosition(position){
+                directionsLatitude = position.coords.latitude;
+                directionsLongitude = position.coords.longitude;
+                markers.push(directionsLatitude, directionsLongitude);
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: {lat: markers[markers.length-2], lng: markers[markers.length-1]}
+                });
+                for (var i = 0; i < markers.length; i=i+2) {
+                    var j = i+1;
+                    var marker = new google.maps.Marker({
+                    position: {lat: markers[i], lng: markers[j]},
+                    map: map
+                    });
+                }
+                
+                if(primeraEntrada == 1){
+                    primeraEntrada = 0;
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 5000);   
+                }else if( (Math.abs((Math.abs(directionsLatitude) - Math.abs(markers[markers.length-2]))) > 0.01) || (Math.abs((Math.abs(directionsLongitude) - Math.abs(markers[markers.length-1]))) > 0.01)){
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 5000);
+                }else if((Math.abs((Math.abs(directionsLatitude) - Math.abs(markers[markers.length-2]))) > 0.001) || (Math.abs((Math.abs(directionsLongitude) - Math.abs(markers[markers.length-1]))) > 0.001)){
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 10000);
+                }else if((Math.abs((Math.abs(directionsLatitude) - Math.abs(markers[markers.length-2]))) > 0.0001) || (Math.abs((Math.abs(directionsLongitude) - Math.abs(markers[markers.length-1]))) > 0.001)){
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 30000);
+                }else{
+                    clearInterval(intervalo);
+                    intervalo = setInterval('initMap()', 60000);
+                }                
+            }
+        }
+        initMap();
+        intervalo = setInterval('initMap()', 5000);
+ 
+        
+        
+    </script>
+    
+
+<%include footer%>
