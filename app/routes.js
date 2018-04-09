@@ -72,6 +72,12 @@ module.exports = (app, passport) => {
 		});
 	});
 
+	/* prueba */
+	app.get('/prueba', (req, res) => {
+		res.render('profileTest', {
+		});
+	});
+	/* prueba */
 
 	app.post('/signup',passport.authenticate('auth0', {
 		clientID: env.AUTH0_CLIENT_ID,
